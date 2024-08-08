@@ -1,0 +1,209 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block content %}
+
+<main id="main">
+  
+  
+ <!--====== SEARCH BOX PART START ======-->
+    
+ <div class="search-box">
+  <div class="serach-form">
+      <div class="closebtn">
+          <span></span>
+          <span></span>
+      </div>
+      <form action="{% url 'search_category' %}"  method="GET">
+        <input  class="form-control" name="keyword" type="text" placeholder="Search">
+        <button type="submit"><i class="bi bi-search"></i></button>
+    </form>
+  </div> <!-- serach form -->
+</div>
+
+<!--====== SEARCH BOX PART ENDS ======-->
+
+<!--====== PAGE BANNER PART START ======-->
+
+
+<section id="page-banner" class="pt-105 pb-130 bg_cover" data-overlay="8" style="background-image: url('{% static 'edulook/images/page-banner-4.jpg' %}');">
+  <div class="container">
+        <div class="row">
+                  <div class="col-lg-12">
+                    <div class=" row justify-content-center text-center mb-5">
+                        {% comment %} <h2 style="color:white;">News to Read</h2> {% endcomment %}
+                    </div> <!-- section title -->
+          </div>
+      </div> <!-- row --> 
+  </div> <!-- container -->
+</section>
+
+<!--====== PAGE BANNER PART ENDS ======-->
+
+<!--====== BLOG PART START ======-->
+
+<section id="blog-page" class="pt-90 pb-120 gray-bg">
+  <div class="container">
+     <div class="row">
+    
+         <div class="col-lg-8">
+          {% for blog in page_obj%}
+             <div class="singel-blog mt-30">
+                 <div class="blog-thum">
+                     <img src="{{ blog.featured_image.url }}" alt="Blog">
+                 </div>
+                 <div class="blog-cont">
+                  <a href="{% url 'post_by_slug' blog.slug %}"><h3>{{ blog.title|truncatewords_html:7 }}</h3><a/>
+                     <ul>
+                         <li><a href="#"><i class="bi bi-calendar3"></i>{{blog.created_at|timesince}} ago</a></li>
+                         <li><a href="#"><i class="bi bi-person"></i>{{blog.author}}</a></li>
+                         <li><a href="#"><i class="bi bi-tags"></i>{{blog.category}}</a></li>
+                     </ul>
+                     <p>{{blog.short_description}}</p>
+
+                     <a href="{% url 'post_by_slug' blog.slug %}"><h6>read more</p><h6/>
+
+                 </div>
+             </div> <!-- singel blog -->
+             {% endfor %}
+
+
+             {% comment %} <div class="row">
+              <div class="col-lg-12">
+                  <nav class="courses-pagination mt-50">
+                      <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                          <li class="page-item">
+                              <a href="?page=1" aria-label="Previous" aria-hidden="true">
+                                  <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                              </a>
+                          </li>
+                        {% endif %}
+    
+    
+                        {% for num in page_obj.paginator.page_range %}
+                           <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                               <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                           </li>
+                        {% endfor %}
+    
+    
+                        {% if page_obj.has_next %}
+                          <li class="page-item">
+                              <a href="?page={{ page_obj.paginator.num_pages }}" aria-label="Next">
+                                  <i class="bi bi-arrow-right"></i>
+                              </a>
+                          </li>
+                          {% endif %}
+                      </ul>
+                  </nav>  <!-- courses pagination -->
+              </div>
+          </div>  <!-- row --> {% endcomment %}
+
+          <!-- Pagination Section -->
+<div class="row" style="text-align: center;">
+    <div class="col-lg-12">
+        <nav class="courses-pagination mt-50" style="display: flex; justify-content: center;">
+            <ul class="pagination" style="list-style: none; padding: 0; margin: 0; display: flex; gap: 5px;">
+                {% if page_obj.has_previous %}
+                    <li class="page-item" style="display: inline;">
+                        <a class="page-link" href="?page=1" aria-label="First" style="border-radius: 0; color: #007bff; text-decoration: none; padding: 0.5em 1em;">
+                            <i class="bi bi-arrow-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" style="display: inline;">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous" style="border-radius: 0; color: #007bff; text-decoration: none; padding: 0.5em 1em;">
+                            <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    <li class="page-item" style="display: inline;">
+                        <a class="page-link" href="?page={{ num }}" style="border-radius: 0; color: #007bff; text-decoration: none; padding: 0.5em 1em; {% if page_obj.number == num %}background-color: #007bff; color: #fff;{% endif %}">
+                            {{ num }}
+                        </a>
+                    </li>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item" style="display: inline;">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next" style="border-radius: 0; color: #007bff; text-decoration: none; padding: 0.5em 1em;">
+                            <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="page-item" style="display: inline;">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last" style="border-radius: 0; color: #007bff; text-decoration: none; padding: 0.5em 1em;">
+                            <i class="bi bi-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav> <!-- courses pagination -->
+    </div>
+</div> <!-- row -->
+
+</div>
+    
+         
+         <div class="col-lg-4">
+             <div class="saidbar">
+                 <div class="row">
+                     <div class="col-lg-12 col-md-6">
+                         <div class="saidbar-search mt-30">
+                             <form action="{% url 'search_category' %}"  method="GET">
+                                 <input  class="form-control" name="keyword" type="text" placeholder="Search">
+                                 <button type="submit"><i class="bi bi-search"></i></button>
+                              
+                             </form>
+                         </div> <!-- saidbar search -->  
+                         
+                        <div class="categories mt-30">
+                          <h4>Categories</h4>
+                          {% for tag in tags %}
+                          <ul>
+                              <li><a href="{% url 'post_by_category' tag.id %}">{{tag.name}}</a></li> 
+                          </ul>
+                          {% endfor %}
+                      </div> 
+                     </div> <!-- categories -->
+                    
+                 </div> <!-- row -->
+             </div> <!-- saidbar -->
+         </div>
+     </div> <!-- row -->
+  </div> <!-- container -->
+</section>
+
+<!--====== BLOG PART ENDS ======-->
+
+
+
+
+
+
+
+
+
+   <!-- ======= CTA Section ======= -->
+   <section class="section cta-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 me-auto text-center text-md-start mb-5 mb-md-0">
+          <h2>Have you found what you were looking for?</h2>
+          <h3>If not, Search for more.</h3>
+        </div>
+
+        <div class="col-md-5 text-center text-md-end">
+          <form action="{% url 'search_category' %}" method="GET">
+            <div class="input-group">
+              <input class="form-control" name="keyword" type="text" placeholder="Search..." aria-label="Enter search term..." aria-describedby="button-search" />
+              <button class="btn btn-warning" id="button-search" type="submit">Search</button>
+          </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section><!-- End CTA Section -->
+</main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,204 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<section id="corses-singel" class="pt-90 pb-120 gray-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="corses-singel-left mt-30">
+                    <div class="title">
+                        <h3>{{course.title}}</h3>
+                    </div> <!-- title -->
+                    <div class="course-terms">
+                        <ul>
+                            <li>
+                                <div class="teacher-name">
+                                    <div class="thum">
+                                        {% comment %} <img src="images/course/teacher/t-1.jpg" alt="Teacher"> {% endcomment %}
+                                    </div>
+                                    <div class="name">
+                                        <span>Instructor</span>
+                                        <h6>{{course.instructor}}</h6>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="course-category">
+                                    <span>Category</span>
+                                    <h6>{{course.category}}</h6>
+                                </div>
+                            </li>
+
+                            
+                        </ul>
+                    </div> <!-- course terms -->
+                    
+                    <div class="corses-singel-image pt-50">
+                        <img src="{{course.thumbnail.url}}" alt="Courses">
+                    </div> <!-- corses singel image -->
+                    
+                    <div class="corses-tab mt-30">
+                        <ul class="nav nav-justified" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="curriculam-tab" data-toggle="tab" href="#curriculam" role="tab" aria-controls="curriculam" aria-selected="false">Curriculam</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="instructor-tab" data-toggle="tab" href="#instructor" role="tab" aria-controls="instructor" aria-selected="false">Requirements</a>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                                <div class="overview-description">
+                                    <div class="singel-description pt-40">
+                                        <h6>Course Summary</h6>
+                                        <p>{{course.description}}</p>
+                                    </div>
+                                
+                                </div> <!-- overview description -->
+                            </div>
+                            <div class="tab-pane fade" id="curriculam" role="tabpanel" aria-labelledby="curriculam-tab">
+                                <div class="curriculam-cont">
+                                    <div class="title">
+                                        <h6>What you will Learn:</h6>
+                                    </div>
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card">
+                                          {% for item in course.get_content_list %}                        
+                                          <li>{{item}}</li>
+                                          {% endfor %}   
+                                        </div>
+                                    </div>
+                                </div> <!-- curriculam cont -->
+                            </div>
+                            <div class="tab-pane fade" id="instructor" role="tabpanel" aria-labelledby="instructor-tab">
+
+                                <div class="instructor-cont">
+                                    <div class="title">
+                                        <h6><b>What you will Learn:</b></h6>
+                                    </div>
+                                    <div class="instructor-author">
+                                        <ul class="step_point">
+                                            {% for requirement in course.get_requirements_list %}
+                                            <p> <li>{{requirement}}</li> </p>
+                                              {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div> <!-- curriculam cont -->
+                            </div>
+
+                            </div> 
+                        </div> <!-- tab content -->
+                    </div>
+                </div> <!-- corses singel left -->
+            </div>
+
+
+            <div class="col-lg-4">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6">
+                        <div class="course-features mt-30">
+                           <h4>Course Features </h4>
+                            <ul>
+                                <li><i class="bi bi-alarm"></i>Duaration : <span>{{course.duration}}</span></li>
+                                <li><i class="bi bi-mortarboard"></i>Level : <span>{{course.level}}</span></li>
+                                <li><i class="bi bi-cash"></i>discount :  <span>{{course.discount}}</span></li>
+                            </ul>
+                            <div class="price-button pt-10">
+                                <span>Price : <b>K{{course.price}}</b></span>
+
+                                {% if enrolled %}
+                                <a href="https://wa.me/c/260762446629" class="main-btn">Enroll Now</a>
+                                {% else %}
+
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'pay' %}" class="main-btn">Pay for this Course</a>
+                                {% else %}
+                                <a href="{% url 'login_user' %}" class="main-btn">Login</a>
+
+                                {% endif %}
+                                {% endif %}
+
+                            </div>
+                        </div> <!-- course features -->
+                    </div>
+
+                    <div class="col-lg-12 col-md-6">
+                        <div class="You-makelike mt-30">
+                            {% if category_courses %}
+                            <h4>You make also like </h4> 
+                           {% for course in category_courses %}
+                            <div class="singel-makelike mt-20">
+                                <div class="image">
+                                    <img src="{{course.thumbnail.url}}" alt="Image">
+                                </div>
+                                <div class="cont">
+                                    <a href="#"><h4>{{course.title}}</h4></a>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-user"></i>31</a></li>
+                                        <li>$50</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            {% endfor %}
+                            {% endif%}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- row -->
+
+
+
+
+
+        {% comment %} <div class="row">
+            <div class="col-lg-8">
+                <div class="releted-courses pt-95">
+                    <div class="title">
+                        <h3>Releted Courses</h3>
+                    </div>
+                    <div class="row">
+                        {% if category_courses %}
+                           {% for course in category_courses %}
+                        <div class="col-md-6">
+                            <div class="singel-course mt-30">
+                                <div class="thum">
+                                    <div class="image">
+                                        <img src="{{course.thumbnail.url}}" alt="Course">
+                                    </div>
+                                    <div class="price">
+                                        <a href="{% url 'course_details' instructor=course.instructor slug=course.slug %}"><span>View</span></a>
+                                    </div>
+                                </div>
+                                <div class="cont">
+                                    <a href="{% url 'course_details' instructor=course.instructor slug=course.slug %}"><h4>{{course.title}}</h4></a>
+                                    <div class="course-teacher">
+                                        <div class="thum">
+                                            <a href="#"><h6>Level: <span>{{course.level}}</span></h6></a><br>
+                                            <a href="#"><h6>Category: <span>{{course.category}}</span></h6></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- singel course -->
+                        </div>
+                      {% endfor%}
+                        {% endif %}
+                        
+                    </div> <!-- row -->
+                </div> <!-- releted courses -->
+            </div>
+        </div> <!-- row --> {% endcomment %}
+    </div> <!-- container -->
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- ======= CTA Section ======= -->
+<section class="section cta-section">
+    <br>
+    <br>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 me-auto text-center text-md-start mb-5 mb-md-0">
+          <h2 data-aos="fade-right">Login User</h2>
+          <form action="{% url 'login_user' %}" method="POST" >
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                    <strong>{{ message }}</strong>.
+                </div>
+                {% endfor %}
+                {% endif %}
+            {% comment %} {{form | crispy}} {% endcomment %}
+
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+
+            <br>
+            <button type="submit" class="btn btn-warning">Submit</button>
+           </form>
+        </div>
+        <div class="col-md-5 text-center text-md-end">
+       <h5><a data-aos="fade-right" style="color:yellow;" href="{% url 'register_user' %}">Add new account</a></h5>
+        </div>
+      </div>
+    </div>
+   
+  </section><!-- End CTA Section -->
+
+{% comment %} 
+  <section class="section cta-section">
+
+    <br>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 me-auto text-center text-md-start mb-5 mb-md-0">
+          <h2 data-aos="fade-right">Login</h2>
+          <br>
+          <form action="{% url 'login_user' %}" method="POST" >
+         
+            {% csrf_token %}
+
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+        
+            <div class="row">
+              <div class="col-md-6 form-group">
+   
+                <input type="text" name="name" class="form-control" id="name" placeholder="Name" required>
+              </div>   
+            </div>
+            {% endif %}
+<br>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Name" required>
+              </div>   
+            </div>
+<br>
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <strong>{{ message }}</strong>.
+</div>
+{% endfor %}
+{% endif %}
+
+            <div class="row">        
+              <div class="col-md-6 form-group">
+                <input type="submit" class="btn btn-primary d-block w-100" value="Submit">
+              </div>
+            </div>
+
+          </form>
+        </div>
+        <div class="col-md-5 text-center text-md-end">
+          <div class="col-md-5 text-center text-md-end">
+            <h5><a data-aos="fade-right" style="color:yellow;" href="{% url 'register_user' %}">Add new account</a></h5>
+             </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- End CTA Section --> {% endcomment %}
+  
+
+
+  {% endblock %}

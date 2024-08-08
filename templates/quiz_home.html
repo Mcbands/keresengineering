@@ -1,0 +1,77 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'test/assets/css/reset.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'test/assets/css/style.css' %}">
+
+    <title>Code Quiz</title>
+</head>
+<body>
+ <!-- Header -->
+
+ <div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 h2" id="viewHScores">View Highscores</div>
+        <div class="col-md-2 ml-auto h2">Time: <span id="timer"><p>{{ questions.duration }}</p></span></div>
+    </div>
+</div>
+
+<!-- end header -->
+
+<!-- jumbotron -->
+    
+    {% for question in questions %}
+        <div class="question" data-duration="">
+            <h3>{{ question.text }}</h3>
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="{{ question.id }}" value="{{ choice.id }}"> {{ choice.text }}<br>
+            {% endfor %}
+        </div>
+        <br>
+    {% endfor %}
+
+    <button id="submit-quiz">Submit Quiz</button>
+
+    <script>
+        // Start the timer for each question dynamically
+        document.querySelectorAll('.question').forEach(function(question) {
+            var duration = parseInt(question.getAttribute('data-duration'));
+            startTimer(duration, question);
+        });
+
+        function startTimer(duration, questionElement) {
+            var countdown = duration;
+            var timer = setInterval(function() {
+                var minutes = Math.floor(countdown / 60);
+                var seconds = countdown % 60;
+                // Display the countdown in the UI
+                questionElement.innerHTML += "<div class='timer'>Time Remaining: " + minutes + "m " + seconds + "s </div>";
+                
+                if (countdown == 0) {
+                    clearInterval(timer);
+                    // Submit the quiz when the timer expires
+                    document.getElementById("quiz-form").submit();
+                } else {
+                    countdown--;
+                }
+            }, 1000);
+        }
+
+        // Submit quiz form
+        document.getElementById('submit-quiz').addEventListener('click', function() {
+            document.getElementById("quiz-form").submit();
+        });
+    </script>
+</body>
+</html>

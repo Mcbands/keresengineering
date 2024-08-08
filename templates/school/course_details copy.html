@@ -1,0 +1,30 @@
+<!-- course_details.html -->
+{% extends 'school/base.html' %}
+
+{% block content %}
+  <h1>{{ course.title }}</h1>
+  <p>{{ course.description }}</p>
+
+  <!-- Existing course details content -->
+
+  <!-- Modules -->
+  <h2>Modules</h2>
+  <ul>
+    {% for module in course.module_set.all %}
+      <li>{{ module.title }} - {{ module.description }}
+        <a href="{% url 'edit_module' instructor=course.instructor.username slug=course.slug module_id=module.id %}">Edit</a>
+        <a href="{% url 'delete_module' instructor=course.instructor.username slug=course.slug module_id=module.id %}">Delete</a>
+      </li>
+      <ul>
+        {% for quiz in module.quiz_set.all %}
+          <li>{{ quiz.question }} - Correct Option: {{ quiz.correct_option }}
+            <a href="{% url 'edit_quiz' instructor=course.instructor.username slug=course.slug quiz_id=quiz.id %}">Edit</a>
+            <a href="{% url 'delete_quiz' instructor=course.instructor.username slug=course.slug quiz_id=quiz.id %}">Delete</a>
+          </li>
+        {% endfor %}
+        <li><a href="{% url 'add_quiz' instructor=course.instructor.username slug=course.slug module_id=module.id %}">Add Quiz</a></li>
+      </ul>
+    {% endfor %}
+    <li><a href="{% url 'add_module' instructor=course.instructor.username slug=course.slug %}">Add Module</a></li>
+  </ul>
+{% endblock %}

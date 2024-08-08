@@ -1,0 +1,140 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block content %}
+
+  <main id="main">
+    <section class="about_us">
+      <div class="container">            
+          <div class="row">
+              <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                  <div class="about_title">
+                      <span></span><h2>About Us</h2><br>
+                     
+                      <p style="text-align: justify;">Keres Engineering and Appliance Technology (KEAT) is a Zambian registered engineering company, established under Act No. 16 of 2011 of the Laws of Zambia. KEAT is dedicated to providing specialized, professional, and high-quality electrical engineering and appliance repair services to its valued customers, both locally and internationally. We are passionate about equipping individuals with the skills needed in various engineering fields through our comprehensive Continuous Professional Development (CPD) courses.
+
+                        CPD is a continuous and ongoing process of acquiring new skills, knowledge, and competencies throughout one’s lifetime. It should be a personal commitment for every professional or individual to stay up to date with the latest developments, adapt to changes, and continuously improve their skills. At KEAT, we believe that growth in knowledge leads to growth in life and global development.
+                        
+                        At KEAT, we are committed to providing specialized and quality services in the electrical and Appliance technological fields. Furthermore , we are fostering a skilled, equipped, and effective workforce, ensuring that positive change is inevitable around us.</p>
+                      {% comment %} <a href="{% url 'aboutmore' %}" title="">Read More About Us <i class="fas fa-angle-right"></i></a> {% endcomment %}
+                   </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-5 col-lg-5 p-0">
+                  <div class="banner_about">
+                    <img src="{% static 'edulook/images/about/about.jpg' %}" alt="Image" class="phone-1" data-aos="fade-right" style="height:500px; width:500px;">
+                   </div>
+              </div>
+              <div class="row about_content_wrapper">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+                <div class="about_content">
+                    <h2>Brief History </h2>
+                    <p style="text-align: justify;">Keres Engineering and Appliance Technology (KEAT) was established in 2022 with a primary focus on providing specialized sewing machine repair services. Originating from a background in industrial maintenance supervision at a leading company, KEAT quickly gained recognition for its commitment to quality and excellence in repair services.<br><br>
+  
+                      Over time, driven by a growing demand for broader engineering solutions, KEAT expanded its offerings to include comprehensive electrical engineering services and diversified appliance repairs. Today, KEAT stands as a trusted provider of appliance repair services, specializing in a wide range of household appliances.<br><br>
+                      
+                      In addition to our repair expertise, KEAT is dedicated to enhancing professional development within the engineering community through our Continuous Professional Development (CPD) courses. These courses are designed to equip individuals with the skills necessary to excel in various engineering fields, ensuring they remain at the forefront of industry advancements.<br><br>
+                      
+                      From humble beginnings in the sewing machine repair industry to a multifaceted engineering and appliance technology company, KEAT continues to uphold its core values of excellence, innovation, and community impact. Our journey reflects our unwavering dedication to delivering reliable, high-quality services and empowering individuals through education and training.<br><br></p>
+                </div>
+            </div>
+          </div>        
+         
+      </div>  
+  </section>
+  
+  
+  <!--========={ Popular Courses }========-->
+  <section class="unlimited_possibilities" id="about_unlimited_possibilities">
+      <div class="container">
+          <div class="row">
+              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="sub_title">
+                      <h2>We pride ourselves in deivering quality services always </h2>
+                  </div><!-- ends: .section-header -->
+              </div>
+              
+              <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                   <div class="single_item single_item_first">
+                      <div class="icon_wrapper">
+                          <i class="flaticon-student"></i>
+                      </div>
+                      <div class="accordion accordion-flush " id="accordionFlushExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                             <b>Our Mission</b>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"> 
+                             <p style="text-align: justify;">
+                             To empower communities by providing reliable appliance repair and electrical services, manufacturing affordable, high-quality appliances, and offering comprehensive appliance repair training courses to foster skill development and economic empowerment.</p>                    
+                                  </p>  </div>
+                          </div>
+                        </div>
+                      </div> 
+                        
+                  </div>
+              </div>
+              <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                  <div class="single_item single_item_center">
+                      <div class="icon_wrapper">
+                          <i class="flaticon-university"></i>
+                      </div>
+                      <div class="accordion accordion-flush " id="accordionFlushExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                             <b>Our Vision</b>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"> 
+                             <p style="text-align: justify;">
+                              To revolutionize the appliance and electrical industry by becoming a leading provider of innovative, sustainable, and accessible appliance and electrical solutions that enhance everyday living and contribute to societal progress.        
+                                  </p>  </div>
+                          </div>
+                        </div>
+                      </div> 
+                      
+                  </div>
+              </div>
+                         
+              <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+                   <div class="single_item single_item_center">
+                      <div class="icon_wrapper">
+                          <i class="flaticon-atom"></i>
+                      </div>
+                      <div class="accordion accordion-flush " id="accordionFlushExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                             <b>Core Values</b>
+                            </button>
+                          </h2>
+                          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body"> 
+                             <p style="text-align: left;">
+                             <b> 1. Excellence:</b> We strive for excellence in all that we do, delivering exceptional products, services, and training programs.<br>
+                              <b>2. Innovation:</b> We embrace innovation, continuously seeking new ways to improve our products, services, and training methods.<br>
+                             <b> 3. Community Impact:</b> We are dedicated to making a positive impact in our communities by providing valuable services and opportunities for skill development.<br>
+                             <b> 4. Integrity:</b> We conduct ourselves with integrity, honesty, and transparency in all our dealings with customers, partners, and stakeholders.<br>
+                             <b> 5. Sustainability:</b> We are committed to sustainability, considering environmental and social factors in our business decisions and practices</p>  </div>
+                          </div>
+                        </div>
+                      </div>   
+                  </div>
+              </div>          
+          </div>
+      </div>
+  </section><!-- End Popular Courses -->
+
+
+  </main><!-- End #main -->
+
+{% endblock %}
+
+
+
+
+
+

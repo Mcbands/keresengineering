@@ -1,0 +1,44 @@
+{% extends 'school/dashboard-base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+
+<main id="main" class="main">
+  <div class="card">
+    <div class="card-body">
+     
+    </div>
+  </div>
+
+
+<sectiion class="table table-dark">
+    <div class='stats'>
+        <div class='stat'>
+            <p class='stat-heading'>Courses enrolled  {{num_courses_enrolled}}</p>
+        </div>
+    </div>
+    <h2 style=''>Recent Enrollments</h2>
+    <div class='dashboard-table'>
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Student</th>
+            <th>Enrollment Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for enrollment in enrollments %}
+          <tr>
+            <td>{{ enrollment.course_title }}</td>
+            <td>{{ enrollment.student_name }}</td>
+            <td>{{ enrollment.enrollment_date }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>      
+    </div>
+</section>
+</main> 
+{% endblock content %}

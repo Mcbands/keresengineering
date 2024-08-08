@@ -1,0 +1,23 @@
+<!-- access_course.html -->
+
+{% extends 'school/base.html' %}
+
+{% block content %}
+  <h2>{{ course.title }}</h2>
+  <p>{{ course.description }}</p>
+
+  {% for module in modules %}
+    <h3>{{ module.title }}</h3>
+    <p>{{ module.content }}</p>
+
+    {% if not forloop.first %}
+      <!-- Link to previous module -->
+      <a href="{% url 'module_detail' instructor=course.instructor.username course_slug=course.slug module_id=modules|slice:":forloop.counter0:forloop.counter|add:"-2"|last %}">Previous Module</a>
+    {% endif %}
+
+    {% if not forloop.last %}
+      <!-- Link to next module -->
+      <a href="{% url 'module_detail' instructor=course.instructor.username course_slug=course.slug module_id=module.id %}">Next Module</a>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,20 @@
+<!-- quiz_list.html -->
+{% extends 'panel/base.html' %} 
+{% block title %}Quizzes{% endblock %}
+
+{% block content %}
+<main id="main" class="main-dark">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Quizzes for {{ course.name }}</h2>
+                <ul>
+                    {% for quiz in quizzes %}
+                    <li>{{ quiz.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

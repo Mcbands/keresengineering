@@ -1,0 +1,74 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block title %}{{ category }}{% endblock title %}
+{% block content %}
+
+<section  class="section" style="width: 100%; height: 380px; overflow: hidden;background: #2d71a1; background: linear-gradient(-45deg, #274685, #1391a5); color: #fff; box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);">
+  <div class="row justify-content-center">
+    <div class="col-md-10 p-0">
+      <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+        <div class="carousel-inner" style="box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);">
+          <div class="carousel-item active">
+            <div class="card-1" style="width: 100%; height: 334px; padding: 20px;">
+              <img src="{% static 'panel/assets/img/slide-1.png' %}" class="card-img-top" alt="...">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card-1" style="width: 100%; height: 334px; padding: 20px;">
+              <img src="{% static 'panel/assets/img/slide-1.png' %}" class="card-img-top" alt="...">
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="card-1" style="width: 100%; height: 334px; padding: 20px;">
+              <img src="{% static 'panel/assets/img/slide-3.png' %}" class="card-img-top" alt="...">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+        {% comment %} <span class="carousel-control-prev-icon" aria-hidden="true"></span> {% endcomment %}
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+        {% comment %} <span class="carousel-control-next-icon" aria-hidden="true"></span> {% endcomment %}
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<main id="main" class="main">
+  <div class="container">
+    <br>
+   <div class="pagetitle">
+    <h5 class="card-title">Category: {{ category }}</h5>
+   </div>
+<br>
+<hr>
+
+  {% if courses %}
+ <div class="row align-items-top">
+  {% for course in courses|slice:6 %}
+  <div class="col-lg-3">
+ <div class="card">
+  <img src="{{course.thumbnail.url}}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title"><a href="{% url 'course_details' instructor=course.instructor slug=course.slug %}">{{ course.title|slice:":80" }}</a></h5>
+    <span class="badge bg-dark"><i class="bi bi-info-circle me-1">Level</i>: {{ course.level }}</span>
+    <span class="badge bg-dark"><i class="bi bi-info-circle me-1"> Duration</i>: {{ course.duration }}</span>
+    <a href="{% url 'course_details' instructor=course.instructor slug=course.slug %}" > <button type="button" class="btn btn-outline-secondary"style="background: #2d71a1; background: linear-gradient(-45deg, #1391a5, #274685); color: #fff; box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);" >View More</button></a>
+  </div>
+</div>
+   </div>
+   {% endfor %}
+   {% else %}
+   <div class="col-md-12">
+     <p style='margin: 2rem 0;'>No courses found in this category.</p>
+   </div>
+ {% endif %}
+    </div>
+
+ </div>
+ </main><!-- End #main -->
+{% endblock %}

@@ -1,0 +1,229 @@
+{% extends 'base_main.html' %}
+{% load static %}
+{% block content %}
+
+
+<!--====== SLIDER PART START ======-->
+<section id="slider-part-3" class="bg_cover"  style="background-image: url('{% static 'edulook/images/page-banner-2.jpg' %}');">
+  <div class="container">
+      <div class="row justify-content-center">
+          <div class="col-lg-10">
+              <div class="slider-cont-3 text-center">
+                  <h2>Search for prefered courses</h2>
+                  <span>More than 50+ courses for you</span>
+                  <div class="slider-search mt-45">
+                     <form action="#">
+                          <div class="row no-gutters">  
+                              <div class="col-sm-9">
+                                  <input type="text" placeholder="Search keyword">
+                              </div>
+                              <div class="col-sm-3">
+                                  <button type="button" class="main-btn">Search Now</button>
+                              </div>
+                          </div> <!-- row -->
+                      </form>
+                  </div>
+              </div> <!-- slider cont3 -->
+          </div>
+      </div> <!-- row -->
+  </div> <!-- container -->
+</section>
+
+<!--====== SLIDER PART ENDS ======-->
+
+<!--====== CATEGORY PART START ======-->
+
+<section id="category-3" class="category-2-items pt-50 pb-80 gray-bg">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-4 col-md-6">
+              <div class="singel-items text-center mt-30">
+                  <div class="items-image">
+                      <img src="{% static 'edulook/images/category/ctg-2.jpg' %}" alt="Category">
+                  </div>
+                  <div class="items-cont">
+                      <a href="main/courses/Appliance technology">
+                          <h5>Appliance Technology</h5>
+                          <span>View courses</span>
+                      </a>
+                  </div>
+              </div> <!-- singel items -->
+          </div>
+          <div class="col-lg-4 col-md-6">
+              <div class="singel-items text-center mt-30">
+                  <div class="items-image">
+                    <img src="{% static 'edulook/images/category/ctg-3.jpg' %}" alt="Category">
+
+                  </div>
+                  <div class="items-cont">
+                      <a href="main/courses/electrical technology">
+                          <h5>Electrical Technology</h5>
+                          <span>View courses</span>
+                      </a>
+                  </div>
+              </div> <!-- singel items -->
+          </div>
+          <div class="col-lg-4 col-md-6">
+              <div class="singel-items text-center mt-30">
+                  <div class="items-image">
+                    <img src="{% static 'edulook/images/category/ctg-1.jpg' %}" alt="Category">
+
+                  </div>
+                  <div class="items-cont">
+                      <a href="main/courses/customer service">
+                          <h5>Customer Service</h5>
+                          <span>57 courses</span>
+                      </a>
+                  </div>
+              </div> <!-- singel items -->
+          </div>
+      </div> <!-- row -->
+  </div> <!-- container -->
+</section>
+
+<!--====== CATEGORY PART ENDS ======-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!--====== SEARCH BOX PART START ======-->
+    
+ <div class="search-box">
+  <div class="serach-form">
+      <div class="closebtn">
+          <span></span>
+          <span></span>
+      </div>
+      <form action="#">
+          <input type="text" placeholder="Search by keyword">
+          <button><i class="fa fa-search"></i></button>
+      </form>
+  </div> <!-- serach form -->
+</div>
+
+<!--====== SEARCH BOX PART ENDS ======-->
+
+<!--====== PAGE BANNER PART START ======-->
+
+
+
+<!--====== COURSES PART START ======-->
+
+<section id="courses-part" class="pt-120 pb-120 gray-bg">
+  <div class="container">
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="courses-grid" role="tabpanel" aria-labelledby="courses-grid-tab">
+              <div class="row">
+                {% for course in courses|slice:6 %}
+                  <div class="col-lg-4 col-md-6">
+                      <div class="singel-course mt-30">
+                          <div class="thum">
+                              <div class="image" style="height:250px; display:flex; justify-content: center;">
+                                  <img src="{{course.thumbnail.url}}" alt="Course">
+                              </div>
+                              <div class="price">
+                                <a href="{% url 'course_details' instructor=course.instructor slug=course.slug %}">
+                                  <span>View</span>
+                                </a>
+                              </div>
+                          </div>
+                          <div class="cont">
+                                             
+                              <span>K{{course.price}}</span>
+                              <a href="{% url 'course_details' instructor=course.instructor slug=course.slug %}"><h4>{{course.title}}</h4></a>
+                              <div class="course-teacher">
+                                  <div class="thum">
+                                    <a href="#"><h6>Duration: <span>{{course.duration}}</span></h6></a><br>
+                                    <a href="#"><h6>Level: <span>{{course.level}}</span></h6></a><br>
+                                    <a href="#"><h6>Category: <span>{{course.category}}</span></h6></a>
+                                      {% comment %} <a href="#"><img src="images/course/teacher/t-1.jpg" alt="teacher"></a> {% endcomment %}
+                                  </div>
+                              </div>
+                          </div>
+                      </div> <!-- singel course -->
+                  </div>
+                  {% endfor %}
+              </div> <!-- row -->
+          </div>  
+      </div> <!-- tab content -->
+      <div class="row">
+          <div class="col-lg-12">
+              <nav class="courses-pagination mt-50">
+                  <ul class="pagination justify-content-center">
+                      <li class="page-item">
+                          <a href="#" aria-label="Previous">
+                              <i class="fa fa-angle-left"></i>
+                          </a>
+                      </li>
+                      <li class="page-item"><a class="active" href="#">1</a></li>
+                      <li class="page-item"><a href="#">2</a></li>
+                      <li class="page-item"><a href="#">3</a></li>
+                      <li class="page-item">
+                          <a href="#" aria-label="Next">
+                              <i class="fa fa-angle-right"></i>
+                          </a>
+                      </li>
+                  </ul>
+              </nav>  <!-- courses pagination -->
+          </div>
+      </div>  <!-- row -->
+    </div> <!-- container -->
+  </div> <!-- container -->
+</section>
+
+<!--====== COURSES PART ENDS ======-->
+  </main><!-- End #main -->
+
+
+  <section id="count-down-part" class="bg_cover pt-70 pb-120" data-overlay="8" style="background-image: url('{% static 'edulook/images/electricaltech1.jpg' %}')">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6">
+                <div class="count-down-cont pt-50">
+                    <h3>Get Appliance & Electrical Engineering Courses</h3>
+                    <h2>Sign up Now</h2>
+                    <div></div>
+                </div> <!-- count down cont -->
+            </div>
+            <div class="col-lg-5 offset-lg-1 col-md-8">
+                <div class="category-form category-form-3 pt-50">
+                    <div class="form-title text-center">
+                      
+                        <span><i class="bi bi-mortarboard" style="color:black;"></i></span>
+                        <h2>Sign up Now</h2>
+                    </div>
+                    <div class="main-form">
+                        <form action="#">
+                            <div class="singel-form">
+                                <input type="text" placeholder="Your name">
+                            </div>
+                            <div class="singel-form">
+                                <input type="email" placeholder="Your Mail">
+                            </div>
+                            <div class="singel-form">
+                                <input type="text" placeholder="Your Phone">
+                            </div>
+                            <div class="singel-form">
+                                <button class="main-btn" type="button">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div> <!-- category form -->
+            </div>
+        </div> <!-- row -->
+    </div> <!-- container -->
+</section>
+
+{% endblock %}

@@ -1,0 +1,188 @@
+{% extends 'base_main.html' %}
+{% block content %}
+
+
+
+<section id="page-banner" class="pt-105 pb-130 bg_cover" data-overlay="8" style="background-image: url(images/page-banner-4.jpg)">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="page-banner-cont">
+                  <h2>{{post.title}}</h2>
+                  <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+                          <li class="breadcrumb-item"><a href="{% url 'home' %}">Blog</a></li>
+                          <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
+                      </ol>
+                  </nav>
+              </div>  <!-- page banner cont -->
+          </div>
+      </div> <!-- row -->
+  </div> <!-- container -->
+</section>
+
+<!--====== PAGE BANNER PART ENDS ======-->
+
+<!--====== BLOG PART START ======-->
+
+<section id="blog-singel" class="pt-90 pb-120 gray-bg">
+  <div class="container">
+     <div class="row">
+        <div class="col-lg-8">
+            <div class="blog-details mt-30">
+                <div class="thum">
+                    <img src="{{post.featured_image.url}}" alt="Blog Details" style="width:800px; height:500px;" >
+                </div>
+                <div class="cont">
+                    <h3>{{post.title}}</h3>
+                    <ul>
+                         <li><a href="#"><i class="bi bi-calendar"></i>{{post.created_at|timesince}} ago</a></li>
+                         <li><a href="#"><i class="bi bi-person"></i>{{post.author}}</a></li>
+                         <li><a href="#"><i class="bi bi-tags"></i>{{post.category}}</a></li>
+                     </ul>
+                     <p style="text-align: justify;">{{post.blog_body}}</p>
+                     
+
+                     <div class="blog-comment pt-45">
+                         <div class="title pb-15">
+                             <h3>Comment ({{total_comments}})</h3>
+                         </div>  <!-- title -->
+                         <ul>
+                             <li>
+                              {% if comments %}
+                              {% for comment in comments %}
+                                 <div class="comment">
+                                     <div class="comment-author">
+                                          <div class="author-thum">
+                                              <img src="images/review/r-1.jpg" alt="Reviews">
+                                          </div>
+                                          <div class="comment-name">
+                                              <h6>{{comment.commented_by}}</h6>
+                                              <span>{{comment.created_at | timesince}} ago</span>
+                                          </div>
+                                      </div>
+                                      <div class="comment-description pt-20">
+                                          <p>{{comment}}</p>
+                                      </div>
+                                      {% comment %} <div class="comment-replay">
+                                          <a href="#">Reply</a>
+                                      </div> {% endcomment %}
+                                  </div> <!-- comment -->
+
+                                  {% endfor %}
+                                  {% endif %}  
+                             </li>
+                         </ul>
+
+
+                         
+                         <div class="title pt-45 pb-25">
+                             <h3>Leave a comment</h3>
+                         </div> <!-- title -->
+                         <div class="comment-form">
+                          <form action="{% url 'post_by_slug' post.slug %}" method="POST">
+                           {% if messages %}
+                          {% for message in messages %}
+                          <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                            <strong>{{ message }}</strong>.
+                          </div>
+                          {% endfor %}
+                          {% endif %}
+
+                          {% csrf_token %}
+                                 <div class="row">
+                                   
+                                     <div class="col-md-12">
+                                         <div class="form-singel">
+                                          <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                         </div> <!-- form singel -->
+                                     </div>
+                                     <div class="col-md-12">
+                                         <div class="form-singel">
+                                             <button class="main-btn" type="submit">Submit</button>
+                                         </div> <!-- form singel -->
+                                     </div>
+                                 </div> <!-- row -->
+                             </form>
+                         </div>  <!-- comment-form -->
+                     </div> <!-- blog comment -->
+                </div> <!-- cont -->
+            </div> <!-- blog details -->
+        </div>
+         <div class="col-lg-4">
+             <div class="saidbar">
+                 <div class="row">
+                     <div class="col-lg-12 col-md-6">
+                         <div class="saidbar-search mt-30">
+                          <form action="{% url 'search_category' %}" method="GET">
+                            <div class="input-group">
+                              <input class="form-control" name="keyword" type="text" placeholder="Search..." aria-label="Enter search term..." aria-describedby="button-search" />
+                              <i class="bi bi-search"></i> <button class="btn btn-warning" id="button-search" type="submit"><i class="bi bi-search"></i></button></i>
+                            </div>
+                          </form>
+
+                         </div> <!-- saidbar search -->
+                         <div class="categories mt-30">
+                             <h4>Categories</h4>
+                             {% for tag in tags %}
+                             <ul>
+                              <li><a href="{% url 'post_by_category' tag.id %}">{{tag.name}} <span>(12)</span></a></li>
+                            </ul>
+                          {% endfor %}
+                         </div>
+                     </div> <!-- categories -->
+                     <div class="col-lg-12 col-md-6">
+                         <div class="saidbar-post mt-30">
+                             <h4>Popular Posts</h4>
+                             <ul>
+                                 <li>
+                                      <a href="#">
+                                          <div class="singel-post">
+                                             <div class="thum">
+                                                 <img src="images/blog/blog-post/bp-1.jpg" alt="Blog">
+                                             </div>
+                                             <div class="cont">
+                                                 <h6>Introduction to languages</h6>
+                                                 <span>20 Dec 2018</span>
+                                             </div>
+                                         </div> <!-- singel post -->
+                                      </a>
+                                 </li>
+                                 <li>
+                                      <a href="#">
+                                          <div class="singel-post">
+                                             <div class="thum">
+                                                 <img src="images/blog/blog-post/bp-2.jpg" alt="Blog">
+                                             </div>
+                                             <div class="cont">
+                                                 <h6>How to build a game with java</h6>
+                                                 <span>10 Dec 2018</span>
+                                             </div>
+                                         </div> <!-- singel post -->
+                                      </a>
+                                 </li>
+                                 <li>
+                                      <a href="#">
+                                          <div class="singel-post">
+                                             <div class="thum">
+                                                 <img src="images/blog/blog-post/bp-1.jpg" alt="Blog">
+                                             </div>
+                                             <div class="cont">
+                                                 <h6>Basic accounting from primary</h6>
+                                                 <span>07 Dec 2018</span>
+                                             </div>
+                                         </div> <!-- singel post -->
+                                      </a>
+                                 </li>
+                             </ul>
+                         </div> <!-- saidbar post -->
+                     </div>
+                 </div> <!-- row -->
+             </div> <!-- saidbar -->
+         </div>
+     </div> <!-- row -->
+  </div> <!-- container -->
+</section>
+
+{% endblock %} 

@@ -1,0 +1,97 @@
+{% extends 'panel/base.html' %}
+
+{% load static %}
+{% block title %}module_detail{% endblock title %}
+
+
+
+{% block scripts %}
+{% comment %} <script src="{% static 'quiz/jquery-3.7.1.js' %}"></script> {% endcomment %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{% static 'quiz/main.js' %}" defer></script>
+{% endblock %}
+
+
+{% block content %}
+{% comment %} <main id="main" class="main-dark">
+    <div class="pagetitle">
+      <h1>{{ module.title }}</h1>
+    </div><!-- End Page Title -->
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="modal fade" id="QuizModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Start?</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body-confirm">
+                  <p> You will be redirected </p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">no</button>
+                  <button class="btn btn-success" id="start-button" type="submit" class="btn btn-outline-secondary" >yes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+   {% endcomment %}
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>{{ module.title }}</h1>
+    </div><!-- End Page Title -->
+    <div class="container">
+    <section class="section">
+      <div class="row">
+          <div class="card">
+            <div class="card-body">
+                <p>{{ module.content|safe }}</p>      
+                {% if prev_module_id %}
+  
+                <div class="row">
+                  <div class="col">
+                    <a href="{% url 'module_detail' prev_module_id %}">
+                      <button type="button" class="btn btn-outline-secondary"style="background: #2d71a1; background: linear-gradient(-45deg, #1391a5, #274685); color: #fff; box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);" >Prev</button>
+                    </a>
+                  </div>
+              
+              {% endif %}
+  
+              
+              {% if next_module_id %}
+              <div class="col">
+              <a href="{% url 'module_detail' next_module_id %}">
+                <button type="button" class="btn btn-outline-success" style="background: #2d71a1; background: linear-gradient(-45deg, #1391a5, #274685); color: #fff; box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);">Next</button>
+              </a>
+             </div>
+              {% else %}                 
+                  
+                  <div class="col text-end">
+                      {% comment %} <a href="{% url 'quiz:main' course_id=course.id %}">Quizzes for {{ course.name }}</a>  {% endcomment %}
+                      <a href="{% url 'quiz:main' %}" class="btn btn-primary" style="background: #2d71a1; background: linear-gradient(-45deg, #1391a5, #274685); color: #fff; box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);">Take Quiz</a>
+                  </div>
+              </div>
+              
+              {% comment %} <a href="{% url 'quiz:main' %}" class="btn btn-primary" style="background: #2d71a1; background: linear-gradient(-45deg, #1391a5, #274685); color: #fff; box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);">Take Quiz</a> {% endcomment %}
+              {% endif %}
+              <br>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+</main><!-- End #main -->
+
+
+
+
+{% endblock %}
+
+
+
+
+
